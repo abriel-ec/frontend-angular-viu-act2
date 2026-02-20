@@ -1,0 +1,97 @@
+<div class="coach-dashboard-container">
+
+    <div class="welcome-banner bg-gradient-coach">
+        <div class="banner-content">
+            <h1>¡Hola, Coach {{ nombreCoach }}!</h1>
+            <p>Este es tu resumen de actividades y clases para el día de hoy.</p>
+        </div>
+    </div>
+
+    <!-- Tarjetas de Resumen Rápido -->
+    <div class="summary-cards">
+        <mat-card class="stat-card">
+            <div class="stat-icon-wrapper bg-soft-primary">
+                <mat-icon color="primary">event_available</mat-icon>
+            </div>
+            <div class="stat-details">
+                <h3>{{ clasesHoy }}</h3>
+                <p>Clases Hoy</p>
+            </div>
+        </mat-card>
+
+        <mat-card class="stat-card">
+            <div class="stat-icon-wrapper bg-soft-accent">
+                <mat-icon color="accent">groups</mat-icon>
+            </div>
+            <div class="stat-details">
+                <h3>{{ alumnosAtendidos }}</h3>
+                <p>Alumnos Reservados</p>
+            </div>
+        </mat-card>
+
+        <mat-card class="stat-card">
+            <div class="stat-icon-wrapper bg-soft-warn">
+                <mat-icon color="warn">play_circle_outline</mat-icon>
+            </div>
+            <div class="stat-details">
+                <h3>{{ nuevosVideos }}</h3>
+                <p>Videos Subidos Mes</p>
+            </div>
+        </mat-card>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Próximas Clases -->
+        <mat-card class="schedule-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon color="primary">schedule</mat-icon> Próximas Clases
+                </mat-card-title>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+
+            <mat-card-content class="schedule-content">
+                <div class="class-item" *ngFor="let clase of proximasClases">
+                    <div class="class-time">
+                        <mat-icon>schedule</mat-icon> {{ clase.hora }}
+                    </div>
+                    <div class="class-info">
+                        <h4>{{ clase.nombre }}</h4>
+                        <span class="location"><mat-icon>location_on</mat-icon> {{ clase.sala }}</span>
+                    </div>
+                    <div class="class-occupancy">
+                        <div class="occupancy-text">
+                            <span>{{ clase.ocupacion }} / {{ clase.capacidad }}</span> Reservas
+                        </div>
+                        <mat-progress-bar mode="determinate" [value]="(clase.ocupacion / clase.capacidad) * 100"
+                            [color]="getOcupacionColor(clase.ocupacion, clase.capacidad)">
+                        </mat-progress-bar>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Accesos Rápidos Coach -->
+        <mat-card class="actions-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon color="primary">flash_on</mat-icon> Acciones Rápidas
+                </mat-card-title>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+
+            <mat-card-content class="actions-content">
+                <button mat-flat-button color="primary" class="action-btn">
+                    <mat-icon>calendar_month</mat-icon> Gestionar Agenda
+                </button>
+                <button mat-flat-button color="accent" class="action-btn" routerLink="/coach/multimedia">
+                    <mat-icon>video_call</mat-icon> Subir Video Tutorial
+                </button>
+                <button mat-stroked-button color="primary" class="action-btn">
+                    <mat-icon>people</mat-icon> Ver Lista de Alumnos
+                </button>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>

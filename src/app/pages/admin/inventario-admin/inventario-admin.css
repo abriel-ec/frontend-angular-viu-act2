@@ -1,0 +1,137 @@
+.admin-inventario-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .header-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+}
+
+.header-text h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 8px 0;
+}
+
+.header-text p {
+    color: #666;
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.add-item-btn {
+    padding: 0 24px !important;
+    height: 48px;
+    font-size: 1.05rem !important;
+    border-radius: 8px !important;
+}
+
+.table-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.table-header-custom {
+    padding: 24px 24px 0 24px !important;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 400px;
+}
+
+.table-content-custom {
+    padding: 0 24px 24px 24px !important;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.inventory-table {
+    width: 100%;
+}
+
+th.mat-header-cell {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 16px !important;
+}
+
+td.mat-cell {
+    padding: 16px !important;
+    color: #4a4e69;
+}
+
+code {
+    background-color: #f1f2f6;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    color: #2f3542;
+    font-weight: 600;
+}
+
+.text-warn {
+    color: #f44336 !important;
+}
+
+.text-muted {
+    color: #888;
+}
+
+.ml-1 {
+    margin-left: 4px;
+}
+
+/* Indicadores visuales en la fila */
+.row-warning {
+    background-color: rgba(255, 152, 0, 0.04);
+}
+
+.row-warning:hover {
+    background-color: rgba(255, 152, 0, 0.08) !important;
+}
+
+.row-danger {
+    background-color: rgba(244, 67, 54, 0.04);
+}
+
+.row-danger:hover {
+    background-color: rgba(244, 67, 54, 0.08) !important;
+}

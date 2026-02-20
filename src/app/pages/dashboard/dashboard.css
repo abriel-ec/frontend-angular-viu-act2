@@ -1,0 +1,198 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.dashboard-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    color: #1a1a2e;
+}
+
+.dashboard-header p {
+    color: #666;
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.dashboard-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.card-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: white;
+}
+
+.bg-accent {
+    background-color: #e94560;
+}
+
+.bg-secondary {
+    background-color: #0f3460;
+}
+
+.bg-tertiary {
+    background-color: #4a4e69;
+}
+
+mat-card-title {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    color: #333;
+}
+
+/* Membership Styles */
+.membership-status {
+    margin: 16px 0;
+}
+
+.plan-name {
+    font-size: 1.5rem;
+    margin: 0 0 8px 0;
+    color: #1a1a2e;
+    font-weight: 700;
+}
+
+.progress-section {
+    margin-top: 24px;
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+}
+
+.days-left {
+    color: #e94560;
+    font-weight: 700;
+}
+
+/* Quick Links Styles */
+.quick-links-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding-top: 16px !important;
+}
+
+.quick-btn {
+    background-color: #f8f9fa;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.quick-btn mat-icon {
+    color: #e94560;
+    font-size: 28px;
+    height: 28px;
+    width: 28px;
+}
+
+.quick-btn span {
+    font-weight: 500;
+    color: #444;
+    font-size: 0.95rem;
+}
+
+.quick-btn:hover {
+    background-color: #fff;
+    border-color: #e94560;
+    color: #e94560;
+    box-shadow: 0 4px 10px rgba(233, 69, 96, 0.15);
+}
+
+/* Activity Styles */
+.activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0 0;
+}
+
+.activity-list li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.activity-list li:last-child {
+    border-bottom: none;
+}
+
+.activity-icon mat-icon {
+    color: #4CAF50;
+}
+
+.activity-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-detail strong {
+    color: #333;
+    font-size: 1rem;
+}
+
+.activity-detail span {
+    color: #888;
+    font-size: 0.85rem;
+    margin-top: 2px;
+}
+
+.card-footer-actions {
+    padding: 8px 16px !important;
+}

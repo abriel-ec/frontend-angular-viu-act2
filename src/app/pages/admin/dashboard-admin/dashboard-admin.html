@@ -1,0 +1,122 @@
+<div class="admin-dashboard-container">
+
+    <div class="header-section">
+        <h2>Panel de Control Analytics</h2>
+        <p>Resumen general del rendimiento de todas las sedes GymZone, {{ adminName }}.</p>
+    </div>
+
+    <!-- KPIs principales -->
+    <div class="kpi-grid">
+
+        <mat-card class="kpi-card">
+            <div class="kpi-icon bg-primary-soft">
+                <mat-icon color="primary">attach_money</mat-icon>
+            </div>
+            <div class="kpi-info">
+                <p>Ingresos del Mes</p>
+                <h3>${{ ingresosMes | number:'1.2-2' }}</h3>
+            </div>
+        </mat-card>
+
+        <mat-card class="kpi-card">
+            <div class="kpi-icon bg-success-soft">
+                <mat-icon class="text-success">person_add</mat-icon>
+            </div>
+            <div class="kpi-info">
+                <p>Nuevos Socios</p>
+                <h3>+{{ nuevosSocios }}</h3>
+            </div>
+        </mat-card>
+
+        <mat-card class="kpi-card">
+            <div class="kpi-icon bg-accent-soft">
+                <mat-icon color="accent">qr_code_scanner</mat-icon>
+            </div>
+            <div class="kpi-info">
+                <p>Asistencias Hoy</p>
+                <h3>{{ asistenciasHoy }}</h3>
+            </div>
+        </mat-card>
+
+        <mat-card class="kpi-card">
+            <div class="kpi-icon bg-warn-soft">
+                <mat-icon color="warn">storefront</mat-icon>
+            </div>
+            <div class="kpi-info">
+                <p>Sedes Activas</p>
+                <h3>{{ sedesActivas }}</h3>
+            </div>
+        </mat-card>
+
+    </div>
+
+    <div class="dashboard-details">
+
+        <!-- Distribución de Membresías -->
+        <mat-card class="detail-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon color="primary">pie_chart</mat-icon> Distribución de Membresías
+                </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content class="dist-content">
+                <div class="dist-item">
+                    <div class="dist-label">
+                        <span>Premium GymZone</span>
+                        <span>{{ membresiasActivas.premium.cantidad }} Socios</span>
+                    </div>
+                    <mat-progress-bar mode="determinate" [value]="membresiasActivas.premium.porcentaje"
+                        color="primary"></mat-progress-bar>
+                </div>
+
+                <div class="dist-item">
+                    <div class="dist-label">
+                        <span>Básico</span>
+                        <span>{{ membresiasActivas.basico.cantidad }} Socios</span>
+                    </div>
+                    <mat-progress-bar mode="determinate" [value]="membresiasActivas.basico.porcentaje"
+                        color="accent"></mat-progress-bar>
+                </div>
+
+                <div class="dist-item">
+                    <div class="dist-label">
+                        <span>Pase Diario</span>
+                        <span>{{ membresiasActivas.diario.cantidad }} Socios</span>
+                    </div>
+                    <mat-progress-bar mode="determinate" [value]="membresiasActivas.diario.porcentaje"
+                        color="warn"></mat-progress-bar>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Alertas del Sistema -->
+        <mat-card class="detail-card alerts-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon class="text-warning">warning</mat-icon> Alertas de Inventario
+                </mat-card-title>
+                <span class="view-all">Ver Inventario</span>
+            </mat-card-header>
+
+            <mat-card-content class="alerts-content">
+                <div class="alert-item" *ngFor="let alerta of alertasInventario">
+                    <div class="alert-icon-wrap">
+                        <mat-icon class="text-warning">inventory_2</mat-icon>
+                    </div>
+                    <div class="alert-text">
+                        <strong>Stock Crítico: {{ alerta.producto }}</strong>
+                        <p>Quedan {{ alerta.stock }} unidades en {{ alerta.sede }}</p>
+                    </div>
+                </div>
+
+                <div class="empty-alerts" *ngIf="alertasInventario.length === 0">
+                    <mat-icon>check_circle</mat-icon>
+                    <p>Todo en orden, sin alertas.</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+</div>

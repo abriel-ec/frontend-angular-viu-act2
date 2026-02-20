@@ -1,0 +1,85 @@
+<div class="membresias-container">
+
+    <!-- Sección: Mi Membresía Actual -->
+    <section class="current-plan-section">
+        <div class="section-header">
+            <h2>Mi Membresía</h2>
+            <p>Gestiona tu plan activo y pagos.</p>
+        </div>
+
+        <mat-card class="current-plan-card">
+            <mat-card-header>
+                <div mat-card-avatar class="card-avatar bg-success">
+                    <mat-icon>verified</mat-icon>
+                </div>
+                <mat-card-title>{{ miPlanActual.nombre }}</mat-card-title>
+                <mat-card-subtitle>
+                    <mat-chip highlighted color="primary" class="status-chip">{{ miPlanActual.estado }}</mat-chip>
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content class="current-plan-details">
+                <div class="detail-item">
+                    <span class="label">Vencimiento:</span>
+                    <span class="value">{{ miPlanActual.fechaVencimiento | date:'mediumDate' }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Monto recurrente:</span>
+                    <span class="value">${{ miPlanActual.precio }}</span>
+                </div>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-actions class="current-plan-actions">
+                <button mat-button color="warn" (click)="gestionarCancelacion()">
+                    <mat-icon>pause_circle_outline</mat-icon>
+                    Suspender / Cancelar
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </section>
+
+    <!-- Sección: Catálogo de Planes -->
+    <section class="plans-catalog-section">
+        <div class="section-header">
+            <h2>Explorar Planes</h2>
+            <p>Sube de nivel o renueva tu suscripción para seguir entrenando.</p>
+        </div>
+
+        <div class="plans-grid">
+            <mat-card *ngFor="let plan of planesDisponibles" class="pricing-card" [class.popular-plan]="plan.popular">
+
+                <div *ngIf="plan.popular" class="popular-badge">
+                    <mat-icon>star</mat-icon> MÁS POPULAR
+                </div>
+
+                <mat-card-header class="pricing-header">
+                    <mat-card-title>{{ plan.nombre }}</mat-card-title>
+                    <div class="price">
+                        <span class="currency">$</span>
+                        <span class="amount">{{ plan.precio }}</span>
+                    </div>
+                    <mat-card-subtitle>{{ plan.duracion }} días de acceso</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content class="pricing-content">
+                    <p class="plan-desc">{{ plan.descripcion }}</p>
+                    <mat-divider></mat-divider>
+                    <ul class="features-list">
+                        <li *ngFor="let feature of plan.features">
+                            <mat-icon color="primary">check_circle</mat-icon>
+                            <span>{{ feature }}</span>
+                        </li>
+                    </ul>
+                </mat-card-content>
+
+                <mat-card-actions class="pricing-actions">
+                    <button mat-raised-button [color]="plan.popular ? 'accent' : 'primary'" class="buy-btn full-width"
+                        (click)="simularPago(plan)">
+                        {{ miPlanActual.id === plan.id ? 'Renovar Plan' : 'Adquirir Plan' }}
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </section>
+
+</div>

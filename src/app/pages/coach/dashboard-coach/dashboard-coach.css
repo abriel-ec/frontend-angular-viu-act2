@@ -1,0 +1,238 @@
+.coach-dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Welcome Banner */
+.welcome-banner {
+    border-radius: 16px;
+    padding: 32px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-gradient-coach {
+    background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+}
+
+.banner-content h1 {
+    margin: 0 0 8px 0;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.banner-content p {
+    margin: 0;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Stat Cards */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.stat-card {
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px !important;
+    gap: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+}
+
+.stat-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stat-icon-wrapper mat-icon {
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+}
+
+.bg-soft-primary {
+    background-color: rgba(63, 81, 181, 0.1);
+}
+
+.bg-soft-accent {
+    background-color: rgba(233, 69, 96, 0.1);
+}
+
+.bg-soft-warn {
+    background-color: rgba(244, 67, 54, 0.1);
+}
+
+.stat-details h3 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1a1a2e;
+}
+
+.stat-details p {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+}
+
+@media (max-width: 960px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.schedule-card,
+.actions-card {
+    border-radius: 16px;
+}
+
+.schedule-card mat-card-title,
+.actions-card mat-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.3rem !important;
+}
+
+/* Schedule List */
+.schedule-content {
+    padding: 0 !important;
+}
+
+.class-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s;
+}
+
+.class-item:hover {
+    background-color: #fafafa;
+}
+
+.class-item:last-child {
+    border-bottom: none;
+}
+
+.class-time {
+    font-weight: 700;
+    color: #1a1a2e;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.class-time mat-icon {
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+    color: #666;
+}
+
+.class-info {
+    flex: 1;
+}
+
+.class-info h4 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.location mat-icon {
+    font-size: 14px;
+    height: 14px;
+    width: 14px;
+}
+
+.class-occupancy {
+    width: 150px;
+}
+
+.occupancy-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.occupancy-text span {
+    font-weight: 700;
+    color: #333;
+}
+
+/* Actions Sidebar */
+.actions-content {
+    padding: 24px 20px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.action-btn {
+    padding: 24px 0 !important;
+    font-size: 1.05rem !important;
+    border-radius: 8px !important;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 24px !important;
+}
+
+::ng-deep .action-btn .mat-icon {
+    margin-right: 12px;
+}

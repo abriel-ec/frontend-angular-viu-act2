@@ -1,0 +1,85 @@
+<div class="fitness-container">
+
+    <div class="header-section">
+        <h2>Centro de Entrenamiento GymZone</h2>
+        <p>Aprende la técnica correcta y descubre nuevas rutinas diseñadas por nuestros expertos.</p>
+    </div>
+
+    <!-- Filtros por Categoría -->
+    <div class="category-filters">
+        <mat-chip-listbox aria-label="Selección de categoría">
+            <mat-chip-option *ngFor="let cat of categorias" [selected]="categoriaSeleccionada === cat"
+                (click)="seleccionarCategoria(cat)" color="primary">
+                {{ cat }}
+            </mat-chip-option>
+        </mat-chip-listbox>
+    </div>
+
+    <!-- Grid de Rutinas -->
+    <div class="routines-grid">
+        <mat-card *ngFor="let rutina of rutinasFiltradas" class="routine-card">
+
+            <!-- Contenedor de Imagen con Overlay de Play -->
+            <div class="routine-img-container" (click)="abrirVideo(rutina)">
+                <img mat-card-image [src]="rutina.imagenUrl" [alt]="rutina.titulo">
+                <div class="play-overlay">
+                    <button mat-icon-button class="play-btn">
+                        <mat-icon>play_circle_filled</mat-icon>
+                    </button>
+                </div>
+                <div class="duration-badge">{{ rutina.duracion }}</div>
+            </div>
+
+            <mat-card-content class="routine-info">
+                <div class="tags">
+                    <span class="muscular-group">{{ rutina.grupoMuscular }}</span>
+                    <span class="level" [ngClass]="rutina.nivel.toLowerCase()">{{ rutina.nivel }}</span>
+                </div>
+
+                <mat-card-title>{{ rutina.titulo }}</mat-card-title>
+                <p>{{ rutina.descripcion }}</p>
+            </mat-card-content>
+
+            <mat-card-actions class="routine-actions">
+                <button mat-button color="primary" (click)="abrirVideo(rutina)">
+                    <mat-icon>smart_display</mat-icon> Ver Tutorial
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <div *ngIf="rutinasFiltradas.length === 0" class="no-results">
+        <mat-icon>fitness_center</mat-icon>
+        <p>Pronto añadiremos rutinas para esta categoría.</p>
+    </div>
+</div>
+
+<!-- Template del Modal para el Reproductor de Video -->
+<ng-template #videoDialog>
+    <div class="dialog-header">
+        <h3 mat-dialog-title>{{ ejercicioSeleccionado?.titulo }}</h3>
+        <button mat-icon-button (click)="cerrarVideo()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content class="video-container">
+        <!-- Usamos un iframe mock. En un caso real sanitizaríamos la URL -->
+        <div class="video-responsive">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="video-details">
+            <div class="tags mb-2">
+                <span class="muscular-group">{{ ejercicioSeleccionado?.grupoMuscular }}</span>
+                <span class="level {{ ejercicioSeleccionado?.nivel?.toLowerCase() }}">{{ ejercicioSeleccionado?.nivel
+                    }}</span>
+            </div>
+            <p>{{ ejercicioSeleccionado?.descripcion }}</p>
+        </div>
+    </mat-dialog-content>
+</ng-template>

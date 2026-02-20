@@ -1,0 +1,133 @@
+<div class="multimedia-container">
+
+    <div class="header-section">
+        <h2>Gestión Multimedia</h2>
+        <p>Sube tutoriales y asócialos a las máquinas del gimnasio para que los socios los vean mediante Códigos QR.</p>
+    </div>
+
+    <div class="multimedia-grid">
+
+        <!-- Formulario de Subida -->
+        <mat-card class="upload-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon color="primary">cloud_upload</mat-icon> Nuevo Tutorial
+                </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content class="form-content">
+                <form [formGroup]="uploadForm" (ngSubmit)="subirVideo()" class="upload-form">
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Título del Ejercicio</mat-label>
+                        <input matInput formControlName="titulo" placeholder="Ej. Prensa a 45 grados">
+                    </mat-form-field>
+
+                    <!-- Input oculto para subida de archivo (simulada) -->
+                    <input type="file" #fileInput (change)="onFileSelected($event)" accept="video/*"
+                        style="display: none;">
+
+                    <div class="file-upload-row">
+                        <mat-form-field appearance="outline" class="flex-grow">
+                            <mat-label>URL del Video o Archivo</mat-label>
+                            <input matInput formControlName="urlVideo" readonly>
+                        </mat-form-field>
+                        <button type="button" mat-stroked-button color="primary" class="browse-btn"
+                            (click)="fileInput.click()">
+                            <mat-icon>folder_open</mat-icon> Buscar
+                        </button>
+                    </div>
+
+                    <div class="form-row">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Máquina Asociada (QR)</mat-label>
+                            <input matInput formControlName="maquinaAsociada" placeholder="Ej. ID-MAC-04">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Grupo Muscular</mat-label>
+                            <mat-select formControlName="grupoMuscular">
+                                <mat-option *ngFor="let g of grupos" [value]="g">{{ g }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Descripción / Tips de Seguridad</mat-label>
+                        <textarea matInput formControlName="descripcion" rows="3"></textarea>
+                    </mat-form-field>
+
+                    <div class="form-actions">
+                        <button mat-flat-button color="primary" type="submit" [disabled]="uploadForm.invalid"
+                            class="submit-btn full-width">
+                            <mat-icon>publish</mat-icon> Subir y Procesar
+                        </button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Tabla de Biblioteca -->
+        <mat-card class="library-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon color="primary">video_library</mat-icon> Biblioteca Activa
+                </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content class="table-container">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z0 asis-table">
+
+                    <!-- Columna Título -->
+                    <ng-container matColumnDef="titulo">
+                        <th mat-header-cell *matHeaderCellDef> Taller / Ejercicio </th>
+                        <td mat-cell *matCellDef="let element">
+                            <span class="video-title">{{element.titulo}}</span>
+                            <span class="video-date">Subido el {{element.fechaSubida}}</span>
+                        </td>
+                    </ng-container>
+
+                    <!-- Columna Máquina -->
+                    <ng-container matColumnDef="maquina">
+                        <th mat-header-cell *matHeaderCellDef> Máquina </th>
+                        <td mat-cell *matCellDef="let element"> {{element.maquina}} </td>
+                    </ng-container>
+
+                    <!-- Columna Musculo -->
+                    <ng-container matColumnDef="grupoMuscular">
+                        <th mat-header-cell *matHeaderCellDef> Grupo M. </th>
+                        <td mat-cell *matCellDef="let element"> <span
+                                class="group-chip">{{element.grupoMuscular}}</span> </td>
+                    </ng-container>
+
+                    <!-- Columna Estado -->
+                    <ng-container matColumnDef="estado">
+                        <th mat-header-cell *matHeaderCellDef> Estado </th>
+                        <td mat-cell *matCellDef="let element">
+                            <span class="status-badge"
+                                [ngClass]="element.estado.toLowerCase()">{{element.estado}}</span>
+                        </td>
+                    </ng-container>
+
+                    <!-- Acciones -->
+                    <ng-container matColumnDef="acciones">
+                        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button color="accent" matTooltip="Ver Código QR">
+                                <mat-icon>qr_code_2</mat-icon>
+                            </button>
+                            <button mat-icon-button color="warn" (click)="eliminarVideo(element.id)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+</div>

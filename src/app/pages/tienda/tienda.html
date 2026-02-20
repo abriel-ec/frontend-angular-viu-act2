@@ -1,0 +1,100 @@
+<div class="tienda-container" [class.carrito-open]="mostrarCarrito">
+
+    <div class="main-catalog">
+        <div class="header-section">
+            <div class="header-text">
+                <h2>Tienda GymZone</h2>
+                <p>Aprovecha tu <span class="discount-badge">15% de Dcto</span> exclusivo por ser Socio Premium.</p>
+            </div>
+
+            <button mat-fab color="primary" class="cart-fab" (click)="toggleCarrito()">
+                <mat-icon [matBadge]="totalItemsCarrito.toString()" matBadgeColor="warn"
+                    [matBadgeHidden]="totalItemsCarrito === 0">shopping_cart</mat-icon>
+            </button>
+        </div>
+
+        <div class="products-grid">
+            <mat-card *ngFor="let prod of catalogo" class="product-card">
+                <img mat-card-image [src]="prod.imagen" [alt]="prod.nombre" class="product-img">
+
+                <mat-card-content class="product-info">
+                    <div class="category">{{ prod.categoria }}</div>
+                    <mat-card-title class="product-title">{{ prod.nombre }}</mat-card-title>
+
+                    <div class="pricing">
+                        <span class="original-price">${{ prod.precioOriginal | number:'1.2-2' }}</span>
+                        <span class="final-price">${{ prod.precioFinal | number:'1.2-2' }}</span>
+                    </div>
+                    <div class="stock-info" [class.low-stock]="prod.stock < 10">
+                        Stock: {{ prod.stock }} unid.
+                    </div>
+                </mat-card-content>
+
+                <mat-card-actions class="product-actions">
+                    <button mat-flat-button color="accent" class="add-to-cart-btn" (click)="agregarAlCarrito(prod)"
+                        [disabled]="prod.stock === 0">
+                        <mat-icon>add_shopping_cart</mat-icon> Agregar
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+
+    <!-- Panel lateral del Carrito (Overlay / Sidebar) -->
+    <div class="cart-sidebar" [class.open]="mostrarCarrito">
+        <div class="cart-header">
+            <h2>Mi Carrito</h2>
+            <button mat-icon-button (click)="toggleCarrito()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="cart-items" *ngIf="carrito.length > 0; else emptyCart">
+            <div class="cart-item" *ngFor="let item of carrito; let i = index">
+                <div class="item-img-sm">
+                    <img [src]="item.producto.imagen" alt="">
+                </div>
+                <div class="item-details">
+                    <div class="item-name">{{ item.producto.nombre }}</div>
+                    <div class="item-qty">Cant: {{ item.cantidad }} x ${{ item.producto.precioFinal | number:'1.2-2' }}
+                    </div>
+                </div>
+                <div class="item-total">
+                    ${{ (item.producto.precioFinal * item.cantidad) | number:'1.2-2' }}
+                    <button mat-icon-button color="warn" class="remove-btn" (click)="removerDelCarrito(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #emptyCart>
+            <div class="empty-cart-msg">
+                <mat-icon>remove_shopping_cart</mat-icon>
+                <p>Tu carrito está vacío.</p>
+            </div>
+        </ng-template>
+
+        <div class="cart-footer" *ngIf="carrito.length > 0">
+            <mat-divider></mat-divider>
+
+            <div class="summary-row savings">
+                <span>Ahorro Membresía:</span>
+                <span>-${{ totalAhorrado | number:'1.2-2' }}</span>
+            </div>
+
+            <div class="summary-row total">
+                <span>Total a Pagar:</span>
+                <span>${{ totalPagar | number:'1.2-2' }}</span>
+            </div>
+
+            <button mat-raised-button color="primary" class="checkout-btn" (click)="finalizarCompra()">
+                <mat-icon>payment</mat-icon> Finalizar Compra
+            </button>
+        </div>
+    </div>
+
+    <div class="cart-overlay" *ngIf="mostrarCarrito" (click)="toggleCarrito()"></div>
+</div>

@@ -1,0 +1,107 @@
+<div class="admin-reportes-container">
+
+    <div class="header-section">
+        <div class="header-text">
+            <h2>Centro de Reportes BI</h2>
+            <p>Analíticas, proyecciones financieras y métricas de comportamiento de usuarios.</p>
+        </div>
+        <div class="header-actions">
+            <button mat-flat-button color="primary">
+                <mat-icon>print</mat-icon> Imprimir Resumen
+            </button>
+        </div>
+    </div>
+
+    <mat-tab-group animationDuration="400ms" color="accent" class="reportes-tabs" dynamicHeight>
+
+        <!-- Tab 1: Finanzas & Crecimiento -->
+        <mat-tab label="Finanzas y Rentabilidad">
+            <div class="tab-content">
+
+                <div class="kpi-row mt-4">
+                    <mat-card class="data-card">
+                        <mat-card-header>
+                            <mat-card-subtitle>Costo Adq. Cliente (CAC)</mat-card-subtitle>
+                            <mat-card-title class="text-warn">${{cac | number:'1.2-2'}}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p class="trend positive"><mat-icon>arrow_downward</mat-icon> 2.1% vs mes pasado</p>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="data-card">
+                        <mat-card-header>
+                            <mat-card-subtitle>Lifetime Value (LTV)</mat-card-subtitle>
+                            <mat-card-title class="text-primary">${{ltv | number:'1.2-2'}}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p class="trend positive"><mat-icon>arrow_upward</mat-icon> 5.4% vs mes pasado</p>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="data-card">
+                        <mat-card-header>
+                            <mat-card-subtitle>Crecimiento Usuarios</mat-card-subtitle>
+                            <mat-card-title class="text-success">+{{crecimientoUsuarios}}%</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p class="trend neutral"><mat-icon>drag_handle</mat-icon> Estable</p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+
+                <mat-card class="chart-card mt-4">
+                    <mat-card-header>
+                        <mat-card-title>Proyección Anual de Ingresos</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="placeholder-chart flex-center">
+                        <mat-icon class="huge-icon text-muted">insert_chart</mat-icon>
+                        <p class="text-muted">El módulo de gráficos requiere una librería externa de Chart.js / ECharts.
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+
+            </div>
+        </mat-tab>
+
+        <!-- Tab 2: Tráfico Cadenas & Horas Pico -->
+        <mat-tab label="Análisis de Asistencia">
+            <div class="tab-content">
+                <div class="twocol-grid mt-4">
+
+                    <mat-card class="traffic-card">
+                        <mat-card-header>
+                            <mat-card-title>Distribución de Asistencia por Sede</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content class="pt-3">
+                            <div *ngFor="let sede of sedesMayorAsistencia" class="progress-item mb-3">
+                                <div class="progress-labels">
+                                    <span>{{sede.nombre}}</span>
+                                    <strong>{{sede.porcentaje}}%</strong>
+                                </div>
+                                <mat-progress-bar mode="determinate" [value]="sede.porcentaje"
+                                    color="primary"></mat-progress-bar>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="traffic-card">
+                        <mat-card-header>
+                            <mat-card-title>Horarios de Mayor Tráfico</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content class="pt-3 pb-2">
+                            <div *ngFor="let hp of horariosPico; let i = index" class="hp-row">
+                                <div class="hp-rank">#{{i+1}}</div>
+                                <div class="hp-time"><mat-icon class="mr-1">schedule</mat-icon> {{hp.hora}}</div>
+                                <div class="hp-count"><strong>{{hp.asistentes}}</strong> pax/día</div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+
+                </div>
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+
+</div>

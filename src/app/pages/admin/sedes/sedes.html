@@ -1,0 +1,66 @@
+<div class="admin-sedes-container">
+
+    <div class="header-section">
+        <div class="header-text">
+            <h2>Control de Sedes Físicas</h2>
+            <p>Supervisa el aforo en tiempo real y la disponibilidad operativa de cada sucursal GymZone.</p>
+        </div>
+        <button mat-flat-button color="primary" class="add-sede-btn">
+            <mat-icon>domain_add</mat-icon> Registrar Sede
+        </button>
+    </div>
+
+    <div class="sedes-grid">
+
+        <mat-card class="sede-card" *ngFor="let sede of listaSedes">
+            <mat-card-header>
+                <div mat-card-avatar class="sede-avatar" [ngClass]="{'bg-disabled': sede.estado !== 'Operativa'}">
+                    <mat-icon *ngIf="sede.estado === 'Operativa'">storefront</mat-icon>
+                    <mat-icon *ngIf="sede.estado !== 'Operativa'">build</mat-icon>
+                </div>
+                <mat-card-title>{{ sede.nombre }}</mat-card-title>
+                <mat-card-subtitle>{{ sede.ubicacion }}</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content class="sede-content">
+
+                <!-- Aforo Vivo -->
+                <div class="aforo-section mb-3">
+                    <div class="aforo-header">
+                        <span>Aforo en Vivo</span>
+                        <span class="aforo-numbers"><strong>{{ sede.aforoActual }}</strong> / {{ sede.aforoMaximo
+                            }}</span>
+                    </div>
+                    <mat-progress-bar mode="determinate"
+                        [value]="getAforoPorcentaje(sede.aforoActual, sede.aforoMaximo)"
+                        [color]="getAforoColor(getAforoPorcentaje(sede.aforoActual, sede.aforoMaximo))">
+                    </mat-progress-bar>
+                    <small class="text-muted mt-1" *ngIf="getAforoPorcentaje(sede.aforoActual, sede.aforoMaximo) >= 90">
+                        <mat-icon class="icon-tiny text-warn">warning</mat-icon> Capacidad casi al límite
+                    </small>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <!-- Coaches Activos -->
+                <div class="coaches-section mt-3">
+                    <p class="section-label">Coaches Asignados:</p>
+                    <mat-chip-set>
+                        <mat-chip *ngFor="let coach of sede.entrenadores">{{ coach }}</mat-chip>
+                    </mat-chip-set>
+                </div>
+
+            </mat-card-content>
+
+            <mat-card-actions class="card-actions">
+                <button mat-button color="primary">Generar Reporte</button>
+                <span class="spacer"></span>
+                <mat-chip [color]="sede.estado === 'Operativa' ? 'primary' : 'accent'" highlighted>
+                    {{ sede.estado }}
+                </mat-chip>
+            </mat-card-actions>
+        </mat-card>
+
+    </div>
+
+</div>

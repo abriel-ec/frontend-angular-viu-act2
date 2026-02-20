@@ -1,1 +1,101 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+
+    <header class="dashboard-header">
+        <div class="header-content">
+            <h1>Hola, {{userName}} 👋</h1>
+            <p>Este es tu resumen de actividad en GymZone Premium.</p>
+        </div>
+        <div class="header-actions">
+            <button mat-raised-button color="primary" routerLink="/asistencias">
+                <mat-icon>qr_code_scanner</mat-icon> Mi QR de Acceso
+            </button>
+        </div>
+    </header>
+
+    <div class="dashboard-grid">
+
+        <!-- Estado de Membresía -->
+        <mat-card class="dashboard-card membership-card">
+            <mat-card-header>
+                <div mat-card-avatar class="card-avatar bg-accent">
+                    <mat-icon>card_membership</mat-icon>
+                </div>
+                <mat-card-title>Mi Membresía</mat-card-title>
+                <mat-card-subtitle>Estado actual</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="membership-status">
+                    <h2 class="plan-name">{{ planNombre }}</h2>
+                    <mat-chip [color]="membresiaActiva ? 'primary' : 'warn'" highlighted>
+                        {{ membresiaActiva ? 'ACTIVA' : 'INACTIVA' }}
+                    </mat-chip>
+                </div>
+
+                <div class="progress-section">
+                    <div class="progress-labels">
+                        <span>Días restantes</span>
+                        <span class="days-left">{{ diasRestantes }} días</span>
+                    </div>
+                    <mat-progress-bar mode="determinate" [value]="progresoMembresia"
+                        [color]="diasRestantes < 15 ? 'warn' : 'primary'">
+                    </mat-progress-bar>
+                </div>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-actions class="card-footer-actions">
+                <button mat-button color="primary" routerLink="/membresias">Renovar / Ver Planes</button>
+            </mat-card-actions>
+        </mat-card>
+
+        <!-- Accesos Rápidos (Quick Links) -->
+        <mat-card class="dashboard-card quick-links-card">
+            <mat-card-header>
+                <div mat-card-avatar class="card-avatar bg-secondary">
+                    <mat-icon>flash_on</mat-icon>
+                </div>
+                <mat-card-title>Accesos Rápidos</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="quick-links-content">
+                <div class="quick-btn" routerLink="/tienda">
+                    <mat-icon>store</mat-icon>
+                    <span>Tienda</span>
+                </div>
+                <div class="quick-btn" routerLink="/rutinas">
+                    <mat-icon>play_circle_filled</mat-icon>
+                    <span>Rutinas</span>
+                </div>
+                <div class="quick-btn" routerLink="/perfil">
+                    <mat-icon>person</mat-icon>
+                    <span>Mi Perfil</span>
+                </div>
+                <div class="quick-btn" routerLink="/asistencias">
+                    <mat-icon>history</mat-icon>
+                    <span>Historial</span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Últimas Asistencias -->
+        <mat-card class="dashboard-card activity-card">
+            <mat-card-header>
+                <div mat-card-avatar class="card-avatar bg-tertiary">
+                    <mat-icon>directions_run</mat-icon>
+                </div>
+                <mat-card-title>Mis Asistencias</mat-card-title>
+                <mat-card-subtitle>Registros recientes</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <ul class="activity-list">
+                    <li *ngFor="let item of ultimasAsistencias">
+                        <div class="activity-icon"><mat-icon>check_circle</mat-icon></div>
+                        <div class="activity-detail">
+                            <strong>{{ item.sede }}</strong>
+                            <span>{{ item.fecha }}</span>
+                        </div>
+                    </li>
+                </ul>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+</div>

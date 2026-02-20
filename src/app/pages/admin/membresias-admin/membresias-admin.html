@@ -1,0 +1,105 @@
+<div class="admin-membresias-container">
+
+    <div class="header-section">
+        <div class="header-text">
+            <h2>Control de Membresías</h2>
+            <p>Configura los planes disponibles y monitorea las renovaciones de los socios.</p>
+        </div>
+        <button mat-flat-button color="primary" class="create-plan-btn">
+            <mat-icon>add_card</mat-icon> Crear Nuevo Plan
+        </button>
+    </div>
+
+    <mat-card class="content-card">
+        <mat-tab-group animationDuration="0ms">
+
+            <!-- Pestaña 1: Planes Configurables -->
+            <mat-tab label="Planes Activos">
+                <div class="tab-content">
+                    <div class="planes-grid">
+                        <mat-card class="plan-card" *ngFor="let plan of planesConfigurados">
+                            <mat-card-header>
+                                <div mat-card-avatar class="plan-icon">
+                                    <mat-icon color="primary"
+                                        *ngIf="plan.nombre.includes('Premium')">workspace_premium</mat-icon>
+                                    <mat-icon color="primary"
+                                        *ngIf="!plan.nombre.includes('Premium')">card_membership</mat-icon>
+                                </div>
+                                <mat-card-title>{{ plan.nombre }}</mat-card-title>
+                                <mat-card-subtitle>${{ plan.precio }}</mat-card-subtitle>
+                            </mat-card-header>
+
+                            <mat-card-content class="plan-metrics">
+                                <div class="metric-row">
+                                    <span>Socios Activos:</span>
+                                    <strong>{{ plan.activos }}</strong>
+                                </div>
+                                <mat-progress-bar mode="determinate" [value]="calcularProgresoVentas(plan.activos)"
+                                    color="primary"></mat-progress-bar>
+
+                                <div class="metric-row mt-3">
+                                    <span>Estado:</span>
+                                    <mat-chip [color]="plan.estado === 'Activo' ? 'primary' : 'warn'" highlighted>
+                                        {{ plan.estado }}
+                                    </mat-chip>
+                                </div>
+                            </mat-card-content>
+
+                            <mat-card-actions align="end">
+                                <button mat-button color="primary">Editar Pago</button>
+                                <button mat-icon-button color="warn" [disabled]="plan.estado === 'Inactivo'">
+                                    <mat-icon>power_settings_new</mat-icon>
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <!-- Pestaña 2: Ventas e Ingresos (Tabla) -->
+            <mat-tab label="Ventas Recientes">
+                <div class="tab-content table-wrapper">
+                    <table mat-table [dataSource]="ingresosRecientes" class="ventas-table">
+
+                        <ng-container matColumnDef="ticket">
+                            <th mat-header-cell *matHeaderCellDef> Recibo </th>
+                            <td mat-cell *matCellDef="let element">
+                                <strong>{{element.idTicket}}</strong>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="socio">
+                            <th mat-header-cell *matHeaderCellDef> Socio </th>
+                            <td mat-cell *matCellDef="let element"> {{element.socio}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="plan">
+                            <th mat-header-cell *matHeaderCellDef> Plan Adquirido </th>
+                            <td mat-cell *matCellDef="let element">
+                                <span class="plan-badge">{{element.plan}}</span>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="fecha">
+                            <th mat-header-cell *matHeaderCellDef> Fecha/Hora </th>
+                            <td mat-cell *matCellDef="let element"> <mat-icon class="icon-small">schedule</mat-icon>
+                                {{element.fecha}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="monto">
+                            <th mat-header-cell *matHeaderCellDef> Monto </th>
+                            <td mat-cell *matCellDef="let element" class="monto-cell">
+                                +${{element.monto}}
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsIngresos"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsIngresos;"></tr>
+                    </table>
+                </div>
+            </mat-tab>
+
+        </mat-tab-group>
+    </mat-card>
+
+</div>

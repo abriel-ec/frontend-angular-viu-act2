@@ -1,0 +1,109 @@
+<mat-sidenav-container class="sidenav-container">
+
+    <mat-sidenav #sidenav mode="side" [opened]="isSidenavOpen" class="sidenav">
+        <div class="sidenav-header">
+            <h2>GymZone</h2>
+            <span class="user-role">{{ userRole }}</span>
+        </div>
+
+        <mat-nav-list>
+            <!-- MENÚ SOCIO -->
+            <ng-container *ngIf="userRole === 'Socio'">
+                <a mat-list-item routerLink="/dashboard" routerLinkActive="active" (click)="isSidenavOpen = true">
+                    <mat-icon matListItemIcon>dashboard</mat-icon>
+                    <span matListItemTitle>Dashboard</span>
+                </a>
+                <a mat-list-item routerLink="/membresias" routerLinkActive="active">
+                    <mat-icon matListItemIcon>card_membership</mat-icon>
+                    <span matListItemTitle>Membresías</span>
+                </a>
+                <a mat-list-item routerLink="/asistencias" routerLinkActive="active">
+                    <mat-icon matListItemIcon>qr_code_scanner</mat-icon>
+                    <span matListItemTitle>Mi QR / Accesos</span>
+                </a>
+                <a mat-list-item routerLink="/tienda" routerLinkActive="active">
+                    <mat-icon matListItemIcon>store</mat-icon>
+                    <span matListItemTitle>Tienda Fitness</span>
+                </a>
+                <a mat-list-item routerLink="/fitness" routerLinkActive="active">
+                    <mat-icon matListItemIcon>fitness_center</mat-icon>
+                    <span matListItemTitle>Entrenamiento</span>
+                </a>
+            </ng-container>
+
+            <!-- MENÚ COACH -->
+            <ng-container *ngIf="userRole === 'Coach'">
+                <a mat-list-item routerLink="/coach/dashboard" routerLinkActive="active" (click)="isSidenavOpen = true">
+                    <mat-icon matListItemIcon>dashboard</mat-icon>
+                    <span matListItemTitle>Panel Coach</span>
+                </a>
+                <a mat-list-item routerLink="/coach/multimedia" routerLinkActive="active">
+                    <mat-icon matListItemIcon>video_library</mat-icon>
+                    <span matListItemTitle>Gestión Multimedia</span>
+                </a>
+                <a mat-list-item routerLink="/coach/clases" routerLinkActive="active">
+                    <mat-icon matListItemIcon>event</mat-icon>
+                    <span matListItemTitle>Mis Clases</span>
+                </a>
+            </ng-container>
+
+            <!-- MENÚ ADMIN -->
+            <ng-container *ngIf="userRole === 'Admin'">
+                <a mat-list-item routerLink="/admin/dashboard" routerLinkActive="active" (click)="isSidenavOpen = true">
+                    <mat-icon matListItemIcon>analytics</mat-icon>
+                    <span matListItemTitle>Dashboard Global</span>
+                </a>
+                <a mat-list-item routerLink="/admin/usuarios" routerLinkActive="active">
+                    <mat-icon matListItemIcon>manage_accounts</mat-icon>
+                    <span matListItemTitle>Gestión Usuarios</span>
+                </a>
+                <a mat-list-item routerLink="/admin/membresias" routerLinkActive="active">
+                    <mat-icon matListItemIcon>loyalty</mat-icon>
+                    <span matListItemTitle>Membresías Nav</span>
+                </a>
+                <a mat-list-item routerLink="/admin/sedes" routerLinkActive="active">
+                    <mat-icon matListItemIcon>business</mat-icon>
+                    <span matListItemTitle>Control Sedes</span>
+                </a>
+                <a mat-list-item routerLink="/admin/inventario" routerLinkActive="active">
+                    <mat-icon matListItemIcon>inventory_2</mat-icon>
+                    <span matListItemTitle>Inventario Global</span>
+                </a>
+                <a mat-list-item routerLink="/admin/ventas" routerLinkActive="active">
+                    <mat-icon matListItemIcon>point_of_sale</mat-icon>
+                    <span matListItemTitle>Historial Ventas</span>
+                </a>
+                <a mat-list-item routerLink="/admin/reportes" routerLinkActive="active">
+                    <mat-icon matListItemIcon>bar_chart</mat-icon>
+                    <span matListItemTitle>Reportes & Caja</span>
+                </a>
+            </ng-container>
+
+            <mat-divider></mat-divider>
+
+            <a mat-list-item (click)="logout()" class="logout-link">
+                <mat-icon matListItemIcon>logout</mat-icon>
+                <span matListItemTitle>Cerrar Sesión</span>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar color="primary" class="top-toolbar">
+            <button mat-icon-button (click)="toggleSidenav()" aria-label="Toggle sidenav">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span class="spacer"></span>
+            <button mat-button class="user-profile-btn" routerLink="/perfil">
+                <mat-icon>account_circle</mat-icon>
+                Mi Perfil
+            </button>
+        </mat-toolbar>
+
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <router-outlet></router-outlet>
+        </main>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

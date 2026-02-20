@@ -1,0 +1,219 @@
+.asistencias-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-section h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 8px 0;
+}
+
+.header-section p {
+    color: #666;
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 24px;
+}
+
+@media (max-width: 900px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tarjeta QR Premium */
+.qr-card {
+    padding: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #fff;
+    align-self: start;
+}
+
+.qr-header {
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.bg-dark {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.logo-text {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.logo-text span {
+    color: #e94560;
+}
+
+.member-type {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: #a0a0b0;
+}
+
+.qr-body {
+    padding: 24px;
+    text-align: center;
+}
+
+.member-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.3rem;
+    color: #333;
+}
+
+.member-info p {
+    margin: 0;
+    color: #888;
+    font-family: monospace;
+    font-size: 1.1rem;
+}
+
+.qr-image-wrapper {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Simulador de Escáner QR */
+.simulated-qr {
+    width: 180px;
+    height: 180px;
+    border: 4px solid #1a1a2e;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background-color: #fafafa;
+}
+
+.qr-icon-placeholder {
+    font-size: 140px;
+    height: 140px;
+    width: 140px;
+    color: #333;
+}
+
+.scanning-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #e94560;
+    box-shadow: 0 0 10px #e94560, 0 0 20px #e94560;
+    animation: scan 2s infinite ease-in-out alternate;
+}
+
+@keyframes scan {
+    0% {
+        top: 5%;
+    }
+
+    100% {
+        top: 95%;
+    }
+}
+
+.scan-text {
+    margin-top: 16px;
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.qr-actions {
+    padding: 8px !important;
+    border-top: 1px solid #f0f0f0;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Historial Table */
+.history-card {
+    border-radius: 16px;
+}
+
+.history-card mat-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.3rem !important;
+    margin-bottom: 16px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.asis-table {
+    width: 100%;
+}
+
+th.mat-header-cell {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 16px !important;
+}
+
+td.mat-cell {
+    padding: 16px !important;
+    color: #555;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sede-badge {
+    background-color: rgba(233, 69, 96, 0.1);
+    color: #e94560;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.method-icon {
+    color: #999;
+}
+
+.method-icon.qr {
+    color: #4CAF50;
+}
+
+.no-data {
+    padding: 32px;
+    text-align: center;
+    color: #888;
+}

@@ -1,0 +1,206 @@
+.membresias-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-header {
+    margin-bottom: 24px;
+}
+
+.section-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 8px 0;
+}
+
+.section-header p {
+    color: #666;
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+/* Current Plan Styles */
+.current-plan-card {
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.bg-success {
+    background-color: #4CAF50;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.status-chip {
+    margin-top: 8px;
+}
+
+.current-plan-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 20px 0;
+    padding: 0 16px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.detail-item .label {
+    color: #666;
+    font-weight: 500;
+}
+
+.detail-item .value {
+    color: #1a1a2e;
+    font-weight: 700;
+}
+
+.current-plan-actions {
+    padding: 16px !important;
+    justify-content: flex-end;
+}
+
+/* Pricing Grid Styles */
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.pricing-card {
+    border-radius: 16px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: visible;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.popular-plan {
+    border: 2px solid #e94560;
+    transform: scale(1.02);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e94560;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 4px 10px rgba(233, 69, 96, 0.3);
+}
+
+.popular-badge mat-icon {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pricing-header mat-card-title {
+    font-size: 1.3rem !important;
+    color: #4a4e69;
+}
+
+.price {
+    margin: 16px 0 8px 0;
+    color: #1a1a2e;
+}
+
+.currency {
+    font-size: 1.5rem;
+    vertical-align: top;
+    margin-right: -4px;
+}
+
+.amount {
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+.plan-desc {
+    text-align: center;
+    color: #666;
+    margin-bottom: 24px;
+    min-height: 40px;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.features-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #444;
+    font-size: 0.95rem;
+}
+
+.pricing-actions {
+    margin-top: auto;
+    padding: 24px !important;
+}
+
+.buy-btn {
+    padding: 24px 0 !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+}
+
+/* Material overrides */
+.mat-mdc-card-header-text {
+    margin: 0 !important;
+}
