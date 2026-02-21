@@ -9,23 +9,23 @@
         <mat-nav-list>
             <!-- MENÚ SOCIO -->
             <ng-container *ngIf="userRole === 'Socio'">
-                <a mat-list-item routerLink="/dashboard" routerLinkActive="active" (click)="isSidenavOpen = true">
+                <a mat-list-item routerLink="/socio/dashboard" routerLinkActive="active" (click)="isSidenavOpen = true">
                     <mat-icon matListItemIcon>dashboard</mat-icon>
                     <span matListItemTitle>Dashboard</span>
                 </a>
-                <a mat-list-item routerLink="/membresias" routerLinkActive="active">
+                <a mat-list-item routerLink="/socio/membresias" routerLinkActive="active">
                     <mat-icon matListItemIcon>card_membership</mat-icon>
                     <span matListItemTitle>Membresías</span>
                 </a>
-                <a mat-list-item routerLink="/asistencias" routerLinkActive="active">
+                <a mat-list-item routerLink="/socio/asistencias" routerLinkActive="active">
                     <mat-icon matListItemIcon>qr_code_scanner</mat-icon>
                     <span matListItemTitle>Mi QR / Accesos</span>
                 </a>
-                <a mat-list-item routerLink="/tienda" routerLinkActive="active">
+                <a mat-list-item routerLink="/socio/tienda" routerLinkActive="active">
                     <mat-icon matListItemIcon>store</mat-icon>
                     <span matListItemTitle>Tienda Fitness</span>
                 </a>
-                <a mat-list-item routerLink="/fitness" routerLinkActive="active">
+                <a mat-list-item routerLink="/socio/fitness" routerLinkActive="active">
                     <mat-icon matListItemIcon>fitness_center</mat-icon>
                     <span matListItemTitle>Entrenamiento</span>
                 </a>
@@ -94,7 +94,7 @@
                 <mat-icon>menu</mat-icon>
             </button>
             <span class="spacer"></span>
-            <button mat-button class="user-profile-btn" routerLink="/perfil">
+            <button mat-button class="user-profile-btn" routerLink="/socio/perfil">
                 <mat-icon>account_circle</mat-icon>
                 Mi Perfil
             </button>

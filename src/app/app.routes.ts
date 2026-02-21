@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
-import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
-import { Dashboard } from './pages/dashboard/dashboard';
+import { Dashboard } from './pages/socio/dashboard/dashboard';
 import { Layout } from './components/layout/layout';
 // import { authGuard } from './guards/auth-guard';
 
@@ -16,13 +15,12 @@ export const routes: Routes = [
         // canActivate: [authGuard], // Descomentar cuando el guard esté listo
         children: [
             // Rutas de Socio
-            { path: 'home', component: Home },
-            { path: 'dashboard', component: Dashboard },
-            { path: 'membresias', loadComponent: () => import('./pages/membresias/membresias').then(m => m.Membresias) },
-            { path: 'asistencias', loadComponent: () => import('./pages/asistencias/asistencias').then(m => m.Asistencias) },
-            { path: 'tienda', loadComponent: () => import('./pages/tienda/tienda').then(m => m.Tienda) },
-            { path: 'fitness', loadComponent: () => import('./pages/fitness/fitness').then(m => m.Fitness) },
-            { path: 'perfil', loadComponent: () => import('./pages/perfil/perfil').then(m => m.Perfil) },
+            { path: 'socio/dashboard', component: Dashboard },
+            { path: 'socio/membresias', loadComponent: () => import('./pages/socio/membresias/membresias').then(m => m.Membresias) },
+            { path: 'socio/asistencias', loadComponent: () => import('./pages/socio/asistencias/asistencias').then(m => m.Asistencias) },
+            { path: 'socio/tienda', loadComponent: () => import('./pages/socio/tienda/tienda').then(m => m.Tienda) },
+            { path: 'socio/fitness', loadComponent: () => import('./pages/socio/fitness/fitness').then(m => m.Fitness) },
+            { path: 'socio/perfil', loadComponent: () => import('./pages/socio/perfil/perfil').then(m => m.Perfil) },
 
             // Rutas de Coach
             { path: 'coach/dashboard', loadComponent: () => import('./pages/coach/dashboard-coach/dashboard-coach').then(m => m.DashboardCoach) },

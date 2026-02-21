@@ -58,7 +58,7 @@ export class Login {
           localStorage.setItem('role', res.user.rol);
 
           // Redirigir a Dashboard (entraría al Layout principal)
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/socio/dashboard']);
         },
         error: () => {
           this.isLoading = false;
@@ -81,7 +81,7 @@ export class Login {
           this.isLoading = false;
           localStorage.setItem('token', res.token);
           localStorage.setItem('role', res.user.rol);
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/socio/dashboard']);
         }
       });
   }
